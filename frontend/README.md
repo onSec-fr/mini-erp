@@ -5,7 +5,7 @@ Petit frontend React (Vite) pour le projet `mini-erp`.
 Prerequis:
 - Node.js 16+ / npm
 
-Installation et lancement:
+Test en local:
 
 ```powershell
 cd frontend
