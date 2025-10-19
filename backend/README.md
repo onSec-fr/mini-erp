@@ -13,7 +13,7 @@ npm install
 npm run dev
 ```
 
-Prérequis -avoir une bdd postgres locale :
+Prérequis - avoir une bdd postgres locale :
 
 ```powershell
 docker run -d --name pg -e POSTGRES_USER=erp_user -e POSTGRES_PASSWORD=erp_pass -e POSTGRES_DB=erp_db -p 5432:5432 postgres
