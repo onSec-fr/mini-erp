@@ -40,7 +40,6 @@ export default function Projects() {
   }
 
   async function remove(id) {
-    if (!confirm('Supprimer ce projet ?')) return
     try {
       await api.deleteProject(id)
       setProjects(prev => prev.filter(p => p.id !== id))

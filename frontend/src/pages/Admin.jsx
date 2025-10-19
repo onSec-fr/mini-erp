@@ -33,7 +33,6 @@ export default function Admin(){
   }
 
   async function remove(id){
-    if (!confirm('Supprimer cet utilisateur ?')) return
     await fetch((import.meta.env.VITE_API_BASE||'http://localhost:3000') + `/api/users/${id}`, { method:'DELETE', headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } })
     await load()
   }

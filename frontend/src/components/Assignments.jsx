@@ -88,7 +88,6 @@ export default function Assignments() {
                 <td>{a.hours ?? '-'}</td>
                 <td style={{textAlign:'right'}}>
                   <button className="btn-action delete" onClick={async ()=>{
-                    if (!confirm('Supprimer cette affectation ?')) return
                     try {
                       await api.deleteAssignment(a.id)
                       setAssignments(prev => prev.filter(x => x.id !== a.id))

@@ -45,7 +45,6 @@ export default function Employees() {
   }
 
   async function remove(id) {
-    if (!confirm('Supprimer cet employé ?')) return
     try {
       await api.deleteEmployee(id)
       setEmployees(prev => prev.filter(p => p.id !== id))
