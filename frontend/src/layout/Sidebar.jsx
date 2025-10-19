@@ -16,9 +16,7 @@ export default function Sidebar() {
         <NavLink to="/crm" className={({isActive})=>isActive? 'active':''}>Processus d'entreprise</NavLink>
         <NavLink to="/dashboard-advanced" className={({isActive})=>isActive? 'active':''}>Personnalisation</NavLink>
         <NavLink to="/permissions" className={({isActive})=>isActive? 'active':''}>Intégrations</NavLink>
-        {getUserRole() === 'admin' && (
-          <NavLink to="/admin" className={({isActive})=>isActive? 'active':''}>Administration</NavLink>
-        )}
+        <NavLink to="/admin" className={({isActive})=>isActive? 'active':''}>Administration</NavLink>
       </nav>
     </aside>
   )

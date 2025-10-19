@@ -20,13 +20,15 @@ import bcrypt from 'bcrypt'
 import usersRoutes from './routes/users.js'
 import { authenticate, requireRole } from './middleware/auth.js'
 import customersRoutes from './routes/customers.js'
+import profileRoutes from './routes/profile.js'
 
 app.use("/api/employees", employeeRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/assignments", assignmentRoutes);
 app.use('/api/auth', authRoutes)
-app.use('/api/users', authenticate, requireRole('admin'), usersRoutes)
+app.use('/api/users', authenticate, usersRoutes)
 app.use('/api/customers', customersRoutes)
+app.use('/api/profile', profileRoutes)
 
 // health check route
 app.get("/health", (req, res) => res.json({ status: "ok" }));
