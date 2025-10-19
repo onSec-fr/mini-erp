@@ -55,7 +55,7 @@ export async function initServer() {
         role: "admin",
       });
       if (envPw) {
-        console.log("✅ Admin user created: username=admin (password from .env)");
+        console.log("✅ Admin user created: username=admin (password from env)");
       } else {
         console.log("✅ Admin user created: username=admin password=", adminPw);
       }
