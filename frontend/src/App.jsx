@@ -7,6 +7,7 @@ import UnderConstruction from './pages/UnderConstruction'
 import Login from './pages/Login'
 import PrivateRoute from './components/PrivateRoute'
 import Admin from './pages/Admin'
+import AdminRoute from './components/AdminRoute'
 import Employees from './components/Employees'
 import Projects from './components/Projects'
 import Assignments from './components/Assignments'
@@ -31,7 +32,7 @@ export default function App(){
             <Route path="/crm" element={<PrivateRoute><UnderConstruction/></PrivateRoute>} />
             <Route path="/dashboard-advanced" element={<PrivateRoute><UnderConstruction/></PrivateRoute>} />
             <Route path="/permissions" element={<PrivateRoute><UnderConstruction/></PrivateRoute>} />
-            <Route path="/admin" element={<PrivateRoute><Admin/></PrivateRoute>} />
+            <Route path="/admin" element={<PrivateRoute><AdminRoute><Admin/></AdminRoute></PrivateRoute>} />
           </Routes>
         </main>
       </div>

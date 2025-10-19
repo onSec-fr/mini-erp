@@ -30,5 +30,6 @@ export const api = {
   deleteProject: (id) => authFetch(`${BASE}/api/projects/${id}`, { method: 'DELETE' }).then(r => r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))),
   listAssignments: () => get('/api/assignments'),
   createAssignment: (payload) => post('/api/assignments', payload),
-  deleteAssignment: (id) => authFetch(`${BASE}/api/assignments/${id}`, { method: 'DELETE' }).then(r => r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`)))
+  deleteAssignment: (id) => authFetch(`${BASE}/api/assignments/${id}`, { method: 'DELETE' }).then(r => r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))),
+  getProfile: () => authFetch(`${BASE}/api/profile`).then(r => r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`)))
 }
