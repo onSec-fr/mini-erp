@@ -22,9 +22,10 @@ import { authenticate, requireRole } from './middleware/auth.js'
 import customersRoutes from './routes/customers.js'
 import profileRoutes from './routes/profile.js'
 
-app.use("/api/employees", employeeRoutes);
-app.use("/api/projects", projectRoutes);
-app.use("/api/assignments", assignmentRoutes);
+// Secure core resources: only authenticated users can access
+app.use("/api/employees", authenticate, employeeRoutes);
+app.use("/api/projects", authenticate, projectRoutes);
+app.use("/api/assignments", authenticate, assignmentRoutes);
 app.use('/api/auth', authRoutes)
 app.use('/api/users', authenticate, usersRoutes)
 app.use('/api/customers', customersRoutes)

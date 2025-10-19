@@ -4,7 +4,7 @@ import { authFetch } from './auth'
 
 // get/post utils
 async function get(path) {
-  const res = await fetch(`${BASE}${path}`)
+  const res = await authFetch(`${BASE}${path}`)
   if (!res.ok) throw new Error(`HTTP ${res.status}`)
   return res.json()
 }
