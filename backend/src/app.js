@@ -31,25 +31,55 @@ app.get("/health", (req, res) => res.json({ status: "ok" }));
 // explicit export
 export async function initServer() {
   console.log("▶️ Initializing server...");
+
   try {
     await sequelize.authenticate();
     await sequelize.sync({ alter: true });
     console.log("✅ Database ready.");
-  // make sure admin user exists
+
+    // make sure admin user exists
     const count = await User.count();
+
     if (count === 0) {
-      const envPw = process.env.INIT_ADMIN_PASSWORD
-      const pw = envPw && envPw.length > 0 ? envPw : Math.random().toString(36).slice(2, 10)
-      const hash = await bcrypt.hash(pw, 10)
-      const admin = await User.create({ username: 'admin', passwordHash: hash, role: 'admin' })
+      console.log("🚀 First initialization: creating default users...");
+
+      // ----- ADMIN -----
+      const envPw = process.env.INIT_ADMIN_PASSWORD;
+      const adminPw = envPw && envPw.length > 0 ? envPw : Math.random().toString(36).slice(2, 10);
+      const adminHash = await bcrypt.hash(adminPw, 10);
+
+      await User.create({
+        username: "admin",
+        passwordHash: adminHash,
+        role: "admin",
+      });
+
       if (envPw) {
-        console.log('✅ Admin user created: username=admin (password from .env)')
+        console.log("✅ Admin user created: username=admin (password from .env)");
       } else {
-        console.log('✅ Admin user created: username=admin password=', pw)
+        console.log("✅ Admin user created: username=admin password=", adminPw);
       }
+
+      // ----- TEST USERS -----
+      const testPw = "0nlyForT3esting!";
+      const testHash = await bcrypt.hash(testPw, 10);
+
+      const testUsers = [
+        { username: "testuser1", role: "user", passwordHash: testHash },
+        { username: "testuser2", role: "user", passwordHash: testHash },
+        { username: "testuser3", role: "user", passwordHash: testHash },
+      ];
+
+      await User.bulkCreate(testUsers);
+
+      console.log("👥 Test users created:");
+      console.log(
+        testUsers.map((u) => ` - ${u.username} / ${testPw}`).join("\n")
+      );
     }
   } catch (err) {
     console.error("❌ DB error:", err);
   }
+
   return app;
 }
