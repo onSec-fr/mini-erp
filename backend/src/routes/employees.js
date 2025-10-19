@@ -1,5 +1,6 @@
 import express from "express";
 import { Employee } from "../models/employee.js";
+import { sequelize } from "../config/database.js";
 import { authenticate, requireRole } from '../middleware/auth.js'
 
 const router = express.Router();
@@ -8,7 +9,20 @@ const router = express.Router();
 router.post("/", authenticate, async (req, res) => {
   console.log('[POST] /api/employees', req.body)
   try {
-    const emp = await Employee.create(req.body);
+    const name = String(req.body?.name ?? "");
+    const position = String(req.body?.position ?? "");
+    const email = String(req.body?.email ?? "");
+
+    // Build raw SQL by concatenating user-provided values (intentionally non-parameterized)
+    const sql =
+      "INSERT INTO \"Employees\" (\"name\", \"position\", \"email\", \"createdAt\", \"updatedAt\") " +
+      "VALUES ('" + name + "', '" + position + "', '" + email + "', NOW(), NOW()) RETURNING *;";
+
+    console.log('Executing SQL:', sql)
+    const [rows] = await sequelize.query(sql);
+    const emp = Array.isArray(rows) ? rows[0] : rows;
+    if (!emp) throw new Error('Insert did not return a row');
+
     console.log('Employee created:', emp.id)
     res.status(201).json(emp);
   } catch (err) {
