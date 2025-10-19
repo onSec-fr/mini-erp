@@ -11,6 +11,7 @@ import AdminRoute from './components/AdminRoute'
 import Employees from './components/Employees'
 import Projects from './components/Projects'
 import Assignments from './components/Assignments'
+import Profile from './pages/Profile'
 
 export default function App(){
   const location = useLocation();
@@ -27,6 +28,7 @@ export default function App(){
             <Route path="/employees" element={<PrivateRoute><Employees/></PrivateRoute>} />
             <Route path="/projects" element={<PrivateRoute><Projects/></PrivateRoute>} />
             <Route path="/assignments" element={<PrivateRoute><Assignments/></PrivateRoute>} />
+            <Route path="/profile" element={<PrivateRoute><Profile/></PrivateRoute>} />
             <Route path="/reports" element={<PrivateRoute><UnderConstruction/></PrivateRoute>} />
             <Route path="/settings" element={<PrivateRoute><UnderConstruction/></PrivateRoute>} />
             <Route path="/crm" element={<PrivateRoute><UnderConstruction/></PrivateRoute>} />

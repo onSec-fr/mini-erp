@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { Navigate } from 'react-router-dom'
 import { api } from '../api'
 
 export default function AdminRoute({ children }){
@@ -26,7 +25,6 @@ export default function AdminRoute({ children }){
   }, [])
 
   if (loading) return <div>Vérification des droits…</div>
-  if (error || !allowed) return <Navigate to="/" replace />
+  if (error || !allowed) return <div className="error">Accès refusé: droits administrateur requis.</div>
   return children
 }
-

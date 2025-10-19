@@ -31,5 +31,6 @@ export const api = {
   listAssignments: () => get('/api/assignments'),
   createAssignment: (payload) => post('/api/assignments', payload),
   deleteAssignment: (id) => authFetch(`${BASE}/api/assignments/${id}`, { method: 'DELETE' }).then(r => r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))),
-  getProfile: () => authFetch(`${BASE}/api/profile`).then(r => r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`)))
+  getProfile: () => authFetch(`${BASE}/api/profile`).then(r => r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))),
+  updateProfile: (id, payload) => authFetch(`${BASE}/api/profile/${id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }).then(r => r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`)))
 }
