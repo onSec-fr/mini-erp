@@ -8,7 +8,12 @@ dotenv.config()
 const app = express();
 app.use(helmet());
 app.use(cors());
-app.use(express.json());
+// Increase JSON body limit to support base64 image payloads (profile photo)
+// Keep reasonable to avoid abuse; route enforces its own stricter checks
+app.use(express.json({ limit: process.env.BODY_LIMIT || '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: process.env.BODY_LIMIT || '10mb' }));
+// static files (user uploads)
+app.use('/uploads', express.static('uploads'));
 
 import employeeRoutes from "./routes/employees.js";
 import projectRoutes from "./routes/projects.js";
