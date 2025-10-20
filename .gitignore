@@ -24,4 +24,5 @@ Thumbs.db
 
 # Others
 *.txt
-backend/uploads/
+backend/uploads/avatars/*.jpg
+backend/uploads/avatars/*.png
