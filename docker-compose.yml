@@ -24,6 +24,8 @@ services:
       JWT_SECRET: dev-secret
     depends_on:
       - db
+    volumes:
+      - uploads_data:/app/uploads
     ports:
       - "3000:3000"    
 
@@ -49,3 +51,4 @@ services:
 
 volumes:
   db_data:
+  uploads_data:
